@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+This is a WoW Themed Skin for WoWBot
+-->
+<ISUI>
+	<!-- WoW Button Textures -->
+	<template name='WoW.ButtonTexture' Filename='Button-Up.png'>
+	</template>
+	<template name='WoW.ButtonTexturePressed' Filename='Button-Down.png'>
+	</template>
+	<template name='WoW.ButtonTextureHover' Filename='Button-Highlight.png'>
+	</template>
+	<template name='WoW.WindowBackground' Filename='Window-Background-Dither.png' ColorKey="FF000000">
+ 		<Left>0</Left>
+		<Top>0</Top>
+		<Right>160</Right>
+		<Bottom>110</Bottom>
+	</template>
+	<template name='WoW.TitleBarBackground' Filename='TitleBar.png'  ColorKey='FFFF179A'>
+		<Border>3</Border>
+	</template>
+	<!-- Font -->
+	<template name='WoW.Font' Template='Default Font'>	
+		<Name>Verdana</Name>
+		<Size>10</Size>
+		<Color>FFEECC00</Color>
+	</template>
+	<!-- CommandButton -->
+	<template name='WoW.commandbutton' template='commandbutton'>
+		<Width>130</Width> 
+		<Height>30</Height> 
+		<BackgroundColor></BackgroundColor>
+		<Font Template='WoW.Font'/>
+		<Texture Template='WoW.ButtonTexture'></Texture>
+		<TexturePressed Template='WoW.ButtonTexturePressed'></TexturePressed>
+		<TextureHover Template='WoW.ButtonTextureHover'></TextureHover>
+		<TextColor>FFEECC00</TextColor>
+	</template>
+	<!-- CommandCheckbox -->
+	<template name='WoW.commandcheckbox' template='commandcheckbox'>
+		<Font Template='WoW.Font'/>
+		<Width>120</Width> 
+		<Height>16</Height> 
+		<Texture Filename='CheckBox-Up.png' />
+		<TextureHover Filename='CheckBox-Highlight.png' />
+		<TexturePressed Filename='CheckBox-Up.png' />
+		<TextureChecked Filename='CheckBox-Down.png' />
+		<TextureCheckedHover Filename='CheckBox-DownHighlight.png' />
+		<TextureCheckedPressed Filename='CheckBox-Down.png' />
+	</template>
+	<template name='WoW.console' Template='console'>
+		<Font Template='console.Font' />
+		<Texture Template='WoW.WindowBackground' />
+		<ScrollbackColor>FF330000</ScrollbackColor>
+		<BackgroundColor />
+		<BorderColor>FFFFFFFF</BorderColor>
+		<SelectionColor>FF006666</SelectionColor>
+		<Border>1</Border>
+		<ScrollBar>console.ScrollBar</ScrollBar>
+	</template>
+	<!-- Window -->
+	<template name='WoW.window.TitleBar.Title.Font' Template='WoW.Font' />
+	<template name='WoW.window.TitleBar.Title'>
+		<X>8</X>
+		<Y>3</Y>
+		<Width>100</Width>
+		<Height>12</Height>
+		<Font Template='WoW.window.TitleBar.Title.Font' />
+	</template>
+	<template name='WoW.window.TitleBar.Minimize.Texture' Filename='MinimiseWindow-Up.png' />
+	<template name='WoW.window.TitleBar.Minimize.TexturePressed' Filename='MinimiseWindow-Down.png'/>
+	<template name='WoW.window.TitleBar.Minimize'>
+		<X>r32</X>
+		<Y>0</Y>
+		<Width>16</Width>
+		<Height>16</Height>
+		<Texture Template='WoW.window.TitleBar.Minimize.Texture' />
+		<TexturePressed Template='WoW.window.TitleBar.Minimize.TexturePressed' />
+	</template>
+	<template name='WoW.window.TitleBar.Maximize.Texture' Filename='MaximiseWindow-Up.png' />
+	<template name='WoW.window.TitleBar.Maximize.TexturePressed' Filename='MaximiseWindow-Down.png' />
+	<template name='WoW.window.TitleBar.Maximize'>
+		<X>r32</X>
+		<Y>0</Y>
+		<Width>16</Width>
+		<Height>16</Height>
+		<Texture Template='WoW.window.TitleBar.Maximize.Texture' />
+		<TexturePressed Template='WoW.window.TitleBar.Maximize.TexturePressed' />
+	</template>
+	<template name='WoW.window.TitleBar.Close.Texture' Filename='CloseWindow-Up.png' />
+	<template name='WoW.window.TitleBar.Close.TexturePressed' Filename='CloseWindow-Down.png' />
+	<template name='WoW.window.TitleBar.Close'>
+		<X>r16</X>
+		<Y>0</Y>
+		<Width>16</Width>
+		<Height>16</Height>
+		<Texture Template='WoW.window.TitleBar.Close.Texture' />
+		<TexturePressed Template='WoW.window.TitleBar.Close.TexturePressed' />
+	</template>
+	<template name='WoW.window.TitleBar'>
+			<Height>16</Height>
+			<Border>3</Border>
+			<BorderColor>FF333333</BorderColor>
+			<Width>100%</Width>
+			<Texture Template='WoW.TitleBarBackground' />
+			<Children>
+				<text Name='Title' template='WoW.window.TitleBar.title' />
+				<button Name='Close' template='WoW.window.TitleBar.Close' />
+				<button Name='Play' template='WoW.window.TitleBar.Play' />
+				<button Name='Pause' template='WoW.window.TitleBar.Pause' />
+				<button Name='Minimize' template='WoW.window.TitleBar.Minimize' />
+				<button Name='Maximize' template='WoW.window.TitleBar.Maximize' />
+			</Children>
+	</template>
+	<template name='WoW.window.Client'>
+		<Y>16</Y>
+		<Height>r16</Height>
+		<Width>100%</Width>
+	</template>
+	<template name='WoW.window' template='window'>
+		<Border>1</Border>
+		<Texture Template='WoW.WindowBackground' />
+		<BorderColor>FF333333</BorderColor>
+		<Resizable>0</Resizable>
+		<CloseButton />
+		<MinimizeButton />
+		<WidthResizable>0</WidthResizable>
+		<HeightResizable>0</HeightResizable>
+		<TitleBar template='WoW.window.TitleBar' />
+		<Client template='WoW.window.Client' />
+	</template>
+	<!-- MessageBox -->
+	<template name='WoW.messagebox' template='messagebox'>
+		<Texture Template='WoW.WindowBackground' />
+		<BackgroundColor>FF000000</BackgroundColor>
+		<Border>1</Border>
+		<BorderColor>FF333333</BorderColor>
+		<TitleBar template='WoW.window.TitleBar' />
+		<Font Template='WoW.Font'/>
+		<OKColor>FFEECC00</OKColor>
+		<CancelColor>FFEECC00</CancelColor>
+		<YesColor>FFEECC00</YesColor>
+		<NoColor>FFEECC00</NoColor>
+		<OKTexture Template='WoW.ButtonTexture' />
+		<OKTexturePressed Template='WoW.ButtonTexturePressed' />
+		<OKTextureHover Template='WoW.ButtonTextureHover' />
+		<CancelTexture Template='WoW.ButtonTexture' />
+		<CancelTexturePressed Template='WoW.ButtonTexturePressed' />
+		<CancelTextureHover Template='WoW.ButtonTextureHover' />
+		<YesTexture Template='WoW.ButtonTexture' />
+		<YesTexturePressed Template='WoW.ButtonTexturePressed' />
+		<YesTextureHover Template='WoW.ButtonTextureHover' />
+		<NoTexture Template='WoW.ButtonTexture' />
+		<NoTexturePressed Template='WoW.ButtonTexturePressed' />
+		<NoTextureHover Template='WoW.ButtonTextureHover' />
+	</template>
+	<!-- Text -->
+	<template name='WoW.text' template='text'>
+		<Font Template='WoW.Font' />
+		<Wrap>0</Wrap>
+		<Alignment>Left</Alignment>
+		<VerticalAlignment>Top</VerticalAlignment>
+	</template>	
+	<!-- TextEntry -->
+	<template name='WoW.textentry' template='textentry'>
+		<MaxLength>256</MaxLength>
+		<Font Template='WoW.Font'/>
+		<SelectionColor>FF000000</SelectionColor>
+		<BackgroundColor>FF000033</BackgroundColor>
+		<BorderColor>FFEECC00</BorderColor>
+		<Border>1</Border>
+		<CaretInnerColor>FFFFFFFF</CaretInnerColor>
+		<CaretOuterColor>FFFFFFFF</CaretOuterColor>
+	</template>
+	<!-- Slider -->
+	<template name='WoW.slider.Texture' filename='Slider.png' ColorKey="FF000000">
+		<Border>0</Border>
+		<Top>0</Top>
+		<Left>0</Left>
+		<Right>110</Right>
+		<Bottom>20</Bottom>
+	</template>
+	<template name='WoW.slider.HandleTexture' filename='Slider.png' ColorKey="FF000000">
+		<Top>3</Top>
+		<Bottom>17</Bottom>
+		<Left>113</Left>
+		<Right>120</Right>
+	</template>
+	<template name='WoW.slider'>
+		<Vertical>0</Vertical>
+		<Range>100</Range> <!-- Causes sliders to default to 0-100. Changing this is not recommended -->
+		<Border>0</Border>
+		<Texture Template='WoW.slider.Texture' />
+		<HandleTexture Template='WoW.slider.HandleTexture' />
+	</template>
+	<template name='WoW.verticalslider' Template='WoW.slider'>
+		<Vertical>1</Vertical>
+		<Texture Template='WoW.slider.Texture'>
+			<Orientation>3</Orientation>
+		</Texture>
+		<HandleTexture Template='WoW.slider.HandleTexture'>
+			<Orientation>3</Orientation>
+		</HandleTexture>
+	</template>
+	<!-- VariableSlider -->
+	<template name='WoW.variableslider.Texture' Template='WoW.slider.Texture' />
+	<template name='WoW.variableslider.HandleTexture' Template='WoW.slider.HandleTexture' />
+	<template name='WoW.variableslider' Template='WoW.slider'>
+		<Vertical>0</Vertical>
+		<Range>100</Range> <!-- Causes variablesliders to default to 0-100. Changing this is not recommended -->
+		<Border>0</Border>
+		<Data></Data>
+		<Offset>0</Offset>
+		<VariableRange>1.0</VariableRange>
+		<Texture Template='WoW.variableslider.Texture' />
+		<HandleTexture Template='WoW.variableslider.HandleTexture' />
+	</template>
+	<template name='WoW.verticalvariableslider' Template='WoW.variableslider'>
+		<Vertical>1</Vertical>
+		<Texture Template='WoW.variableslider.Texture'>
+			<Orientation>3</Orientation>
+		</Texture>
+		<HandleTexture Template='WoW.variableslider.HandleTexture'>
+			<Orientation>3</Orientation>
+		</HandleTexture>
+	</template>
+
+
+
+
+	<template name='WoW.window.TitleBar.Play.Texture' Filename='play-up.png' />
+	<template name='WoW.window.TitleBar.Play.TexturePressed' Filename='play-down.png'/>
+	<template name='WoW.window.TitleBar.play'>
+		<X>r48</X>
+		<Y>0</Y>
+		<Width>16</Width>
+		<Height>16</Height>
+		<Texture Template='WoW.window.TitleBar.Play.Texture' />
+		<TexturePressed Template='WoW.window.TitleBar.Play.TexturePressed' />
+	</template>
+	<template name='WoW.window.TitleBar.Pause.Texture' Filename='pause-up.png' />
+	<template name='WoW.window.TitleBar.Pause.TexturePressed' Filename='pause-down.png' />
+	<template name='WoW.window.TitleBar.Pause'>
+		<X>r48</X>
+		<Y>0</Y>
+		<Width>16</Width>
+		<Height>16</Height>
+		<Texture Template='WoW.window.TitleBar.Pause.Texture' />
+		<TexturePressed Template='WoW.window.TitleBar.Pause.TexturePressed' />
+	</template>
+
+</ISUI>
