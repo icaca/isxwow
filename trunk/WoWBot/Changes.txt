@@ -1,0 +1,287 @@
+WoWBot 15
+
+Changes
+* Fixed running during downtime bug.
+* Added a force sell/repair button.
+* Fixed international Char support.
+* Fixed smartface code. (less spinning)
+* Added several more entries to the options screen.
+* Added a button to SET the options changes.
+
+
+WoWBot 14a
+*new features
+
+Changes
+* Made default pathfile be listed
+* Added Options tab, more to come later.
+* Added 5 options to the tab for the time being
+* Added NewPath button but not completely useful yet
+
+
+
+WoWBot 14
+*minor update
+
+Changes
+* Hopefully fixed the agro routine
+* Updated the Mob Finder
+* SPINFIX! (well somewhat)
+* Added a somewhat pissy pathfile changer (use exact file name, must be located in the pathfiles subdirectory, NOT CHAR DEPENDANT)
+
+ToDo
+* Update wowbotpath to allow filename choosing for output.
+* Add a wowbotpath launch button.
+* Add a screen to allow you to dynamically adjust settings (temporary changes)
+
+WoWBot 13
+
+Changes
+* Moved all UI into one tabbed frame
+* Converted status report into console
+* Added integrated item sorter
+* Smoothed out move functions to reduce bot-like behavior.  Will not stop to turn unless the turn is sharp enough.
+* Added Logout Timer
+* Fixed show waypoints function
+* Changed merchant run to skirmishto to decrease mortality rate
+
+ToDo
+* New waypoint system - Multiple hunting routes, buying from vendor, muling items at the mailbox
+* New waypoint data file storage system - Create and open different path files without renaming XML files all day
+
+WoWBot 12a
+
+Changes
+* Fixed typo in movetoobject (eqjoe).
+* Added Durability check to trigger run to merchant. You can set if you want to auto repair and at what level in the config file. The function to check if you need to repair is done when your resurrect and should be called from your downtime function too.
+* Will now auto disable selling if your still full after visiting merchant (will still repair though if needed).
+* Added switch to General Options to disable complex targeting if desired for a faster Target routine. This will stop the target routine from checking if units could bring adds when you pull.
+* Added switch to Pathing Options to turn off fast face this does mean if its a tight turn your bot will stop to turn which may look just as 'bot like' as face -fast looks suspicious but you cant have it both ways :)
+* Added very basic hunter example Routines.iss to demonstrate how you can use the Min and Max ranged values added to the config file.
+
+ToDo
+* Add support for Mounts 
+* Add support for switching out of shapeshift forms
+
+WoWBot 12
+
+Changes
+* Added Looting of usable mines/herbs/chests.
+* Fixed creation of config files.
+* Fixed not entering Downtime after fleeing.
+* Added timer to delay aggro checking if you get false aggro.
+* Fixed Move to safe spot for Ress'ing.
+* Added Usable check to CastSpell.
+* Added ExitGame function to activate your Hearthstone and then Logout.
+* Added StuckCount to Routines.iss to call ExitGame function if your stuck to many times whilst in combat.
+* Made targeting routine check your distance from the path bewteen waypoints rather than the last waypoint when calculating range to search
+
+ToDo
+* Add support for Mounts 
+
+WoWBot 11b
+
+Changes
+* Fixed it so you rest after resurecting.
+* Added check to prevent going into LOOT state if you have aggro.
+* Moved wowbot.iss into the wowbot directory and fixed up paths.
+* Changed RealmName from LUA call to new ${ISXWoW.RealmName} this should fix problems with realm names having a trailing space.
+* Removed 'unsafe' characters from Realm and Player names for generating directories etc.
+* Removed RunHome from Settings File as its no longer used.
+* Upped frequency of auto generated waypoints to every 10 when making Paths with WoWBotPather.
+* Changed all Face command to use the SmartFace function. This should make it easier to tune face if your having problems.
+* Changed the range used in FindTarget to just use the MaxRoam value as the maximum rather than calculate it based on your distance from your waypoint as it meant youd miss targets when traveling between waypoints.
+* Changed the example Downtime function to use the MinHealth and MinMana values stored in the configuration file.
+* Added check for aggro on your pet in the CheckAggro function (kras).
+* Added auto creation of realm and character directories.
+* Added StatsLog in the character directory that dumps relevant information from the Stats UI.
+
+
+
+WoWBot alpha 11a
+
+Changes:
+* Added check to spell casting to show error in the log if you try to cast a spell you dont have and avoid dumping the script.
+
+WoWBot alpha 11
+
+Changes:
+* Fixed bug in FindTarget meaning aggros close together were not being avoided.
+* Changed CastSpell so you no longer have to supply a target and it will always stop you moving whilst it casts. If the spell is a targetable one like a buff or heal and no target is supplied it assumes the target is itself. As a consequence there will be no more target switching within CastSpell. If you WANT to switch targets then you can use TargetAndCastSpell instead. If you WANT to not stop moving if its an instacast then use CastOnRun instead.
+* Removed the RestUp function from Routines.iss and all references to call it.
+* Added 2 new functions to Routines.iss CombatPrep and Downtime.  Combat prep gets called once you have a target but before you actually start to attack it and Downtime gets called once combat is over and before you loot.
+* Added check to FindTarget to avoid targetting your own pets, totems etc.
+* Removed IsCaster and all checks that use it since it was largely useless now that RestUp has been removed.
+* Shrunk the status window and added a background.
+
+
+WoWBot alpha 10b
+
+Changes:
+* Fixed Pathing issues when wandering too far from your patrol path no really this time I have.
+* Added sit check to sample routines RestUp function.
+* Changed order of some checks so you Rest before Looting.
+
+
+
+WoWBot alpha 10a
+
+Changes:
+* Fixed Pathing issues when wandering too far from your patrol path for real this time.
+* Fixed crash bug when exiting with new IS version.
+* Fixed not starting to search for target until you get to the start of the patrol path.
+* Bot will no longer pause at each waypoint when searching for targets.
+* Made Pause button stop you moving too.
+
+WoWBot alpha 10
+
+Changes:
+* Improved Looting performance including using uppcase SHIFT so it works on non english keyboards
+* Improved Skinning performance
+* Changed aggro detection to check for the nearest aggro mob that has YOU as ITS target.
+* Reduced the size of some ui windows
+* Added a Pause/Play button.
+* Fixed Pathing issues when wandering too far from your patrol path
+* Fixed the Stats not updating.
+
+
+WoWBot alpha 9
+
+Changes:
+* Altered CastSpell to only stop you moving if its not an instacast spell. (Voltstorm)
+* Altered Flee check in Routines.iss (Voltstorm)
+* Added Hack to fix FindTarget function (Voltstorm)
+* Fixed Typo in FindTarget (Voltstorm)
+* Fixed Typo in Drink (Voltstorm)
+* Added fix to prevent trying to sell whilst dead. (Kras)
+* Fixed getting stuck in the fleeing state if you die
+* Fixed Getting stuck if loop path is set
+* Fixed UI elements for new IS behaviour
+* Added Money and xp to level to stats ui (Kras)
+
+
+WoWBot alpha 8
+
+Changes:
+* Made use of new activeplayer.Corpse member so there more chance of automatically retrieving your corpse.
+* Removed Rank argument from CastSpell instead of CastSpell "<Name>" <Rank> <Target GUID> its now just CastSpell "<Name>" <Target GUID>.
+* Added more checking to avoid false positives on the check for getting stuck.
+* Fixed problem where if a critter or blacklisted mob was the only possible target it was still targeted.
+* Fixed Target routine so it wont aggro on a mob too low to be a valid target but would still aggro. 
+* Added Z check in the targeting routine.
+* Added option to config file LoopPatrolPath. If set to 1 you will go directly from the last patrol point to the first instead of reversing the path.
+* Added Keep list to InventoryManagement.xml. Items on the Keep list will not be sold or destroyed.
+* Added SellByRarity and DestroyByRarity to InventoryManagement.xml you will Sell or Destroy Items equal to or lower than the Rarity level defined by SellByRarityLevel and DestroyByRarityLevel. 
+* Moved config files and routines file around to better support multiple characters and realms. all character specific stuff now goes into a folder like this /WoWBot/<Realm Name>/<Character Name>. In here you put your character specific routines file now just called routines.iss, IventoryManagement.xml, FoodNDrink.xml, a WoWBot_<Character Name>.xml will be automatically created in here along with any path file generated by WoWBotPath.iss.
+* Added Aggro check to Attack function in Routines.iss to take care of aggros whikst your advancing to your target.(astyrfan)
+* Fixed missing looting if you get a false aggro.
+* You will now start patroling from the nearest point rather than running to the start.
+
+
+TODO
+* Improve obstacle avoidance.
+* Add tradeskill component gathering.
+* Add support for mounts.
+* Improve WoWBotPather.
+
+
+WoWBot alpha 7
+
+Changes:
+* Fixed casting messages and facing when your casting on yourself (xbjim).
+* Tweaked spellcasting function to stop server disconnects (PiCkLeD)
+* Added checkbox to open/close status window.
+* Added key bind SHIFT+ALT+W to toggle on/off the diaplay of the main UI.
+* Added a nice message if you dont have a <Character Name>Routines.iss message (make sure you have #define ROUTINES in you custom routines to avoid this message poping up when you do have one)
+* Added -untapped to the object search in the targeting function.
+* Added routine to sell to a merchant when your inventory is full. You can use the keepempty config value to go to the merchant before your actually full. See InventoryManagement.xml for config.
+* Added Inventory Cleanup routine at the end of looting. See InventoryManagement.xml for config.
+* Sped up the loot and Skinning routine a bit (selu989)
+* Changed skining to keep trying whilst the corpse is skinnable (Fatal)
+* Added some code to the end of TemplateRoutines.iss to reset the PlayerFrame Aggro display to hopefully cut down on the false aggro's 
+
+
+
+WoWBot alpha 6
+
+Changes:
+* Added hud message update to cast spell routine
+* Added FoodNDrink.xml config file. The Eat and Drink function will look down the list and consume the first item they come too. If you want to change the priority then just put yor prefered food or drink higher up the list. There is no need to keep the key names in numeric order so long as you do not duplicate them.
+* Streamlined FindTarget routine.
+* Added GUIDBlacklist for keeping a list of bad target mobs.
+* Added blacklist of target GUID to the bailout of the Attack function in TemplateRoutines.iss.
+* Added PullBeforeContinue flag default to true. This will ensure and casters do the pulling spell before any of the other spells.
+* Added number of deaths to stats report.
+* Added prompt to auto run WoWBotPath if no path file is found.
+* Changed RLG check to only run if your less than 25% HP's
+* Added Skirmish option to scan for targets as your move between waypoints.
+* Added WoW Themed textures to gui elements.
+* Added pause to WoWBotPath so you dont have to start again when you die (Kras)   
+
+
+TODO
+* Make add destroy list for loot routine.
+* Add sell at merchant routine.
+* Improve obstacle avoidance.
+* Add tradeskill component gathering.
+
+07\06 WoWBot alpha 5
+
+Changes:
+* Moved location of xml config file to WoWBot directory (If you forget to move yours you'll get a new one generated. YOU HAVE BEEN WARNED!!) 
+* Made use of :Inc method where appropriate (Trickster :P)
+* Added cleanup of all lootable corpses. This will only happen if you have spare inventory space to prevent constantly checking corpses you cannot loot
+* Changed cast spell routine to constantly face you target whilst casting to cut down on miscasts.
+* Fixed Face in the TemplateRoutines.iss attack function (cant believe no one spotted this).
+* Added TargetMinLevelDiff and TargetMaxLevelDiff so you can modify how the targeting routine selects a target.
+* Added support for Patrol Route using the IS Navigation Sytem.
+* Added support for corpse run using the IS Navigation System.
+* Added support for running like a girl if you have too many aggro mobs in combat.
+* Added small ISUI based script to help you generate a navigation file.
+* Moved the Hud output to a moveable window
+* Added quick hack to try and speed up the FindTarget routine.
+
+
+TODO:
+* Streamline FindTarget routine.
+* Add GUID blacklist to target routine.
+* Make add destroy list for loot routine.
+* Add sell at merchant routine.
+* Improve obstacle avoidance.
+
+26\05 WoWBot alpha 4
+
+Changes:
+* Added DEAD state and CorpseRun function. It does nothing other then waits in a loop atm.
+* Added ROAM state and Roam function. Just waits and makes you dance atm.
+* Altered the atexit function to just release keys rather then press them.
+* Changed the rest routines to use standarad variables instead of defines.
+* Renamed the #defines controlling the REST state to make more sense.
+* Made stuck check a bit more lax to deal with situation where you are stuck but bouncing side to side.
+* Fixed logic that checked if you were now unstuck before stuck timer expired to only check if you think you are stuck.
+* Changed logic of attack routine so it will timeout after a set period.
+* Added XML configuration file.
+* Migrated some setting to the XML config file. More to follow.
+	RunHome - Do you want to run back to the home point if your futher than MaxRoam from it?
+	MaxRoam - Maximum Distance to roam from waypoint
+	MaxNoTargetCount - The number of times you search for a target before giving up and moving on.
+	IsCaster - Do you want to check for mana as well as health when resting
+	SitWhenRest - Do you want to sit down when resting
+	MinHealthPct- The minimum percentage value your health can be before you start to rest
+	MinManaPct - The minimum percentage value your mana can be before you start to rest
+	DoSkinning - Do you wan to skin or not
+	CombatBailout - How long to run attack routine before giving up
+	CombatMaxDist - The maximum distance to the mob for melee (used for melee positioning)
+	CombatMinDist - The minimum distance to the mob for melee (used for melee positioning)
+	TargetingRange  - Target the mob once its closer than this distance
+	PullingRange - Execute the pull routine once the mob is closer than this distance
+* Updated varsets to use :Set[]
+* Updated redirect operators to use redirect command instead.
+* removed many unneeded quotes around decision statements.
+
+23\05 - Hopefully fixed Attacking NULL problem.  Moved a few defines and things into more logical places. Added a TemplateRoutines.iss that should provide basic attacking and moving.  If anything changes in the TemplateRoutines.iss then ill make sure I mention it from now on so you will know to review your own customised version. Also commented out the log file generation. If you want to turn it back on just uncomment the define in Debug.iss 
+
+19\05 - Fixed problem with ignoring adds, replaced lua calls with new isxwow objects. 
+
+18\05 - Fixed a few bugs, added skinning. 
+

@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ISUI>
+	<Window name='WoWBot' Template='WoW.window'> 
+		<Visible>1</Visible>
+		<Title>WoWBot</Title>
+		<X>200</X> 
+		<Y>200</Y> 
+		<Width>410</Width> 
+		<Height>315</Height>
+		<TitleBar>
+			<Height>16</Height>
+			<Border>3</Border>
+			<BorderColor>FF333333</BorderColor>
+			<Width>100%</Width>
+			<Texture Template='WoW.TitleBarBackground' />
+			<Children>
+				<text Name='Title' template='WoW.window.TitleBar.title' />
+				<text Name='TitleBotStatusCap' template='WoW.text'>
+					<Visible>0</Visible>
+					<X>r150</X>
+					<Y>4</Y>
+					<Width>40</Width>
+					<Height>12</Height>
+					<Text>State:</Text>
+				</text>
+				<text Name='TitleBotStatus' template='WoW.font'>
+					<Visible>0</Visible>
+					<X>r120</X>
+					<Y>3</Y>
+					<Width>60</Width>
+					<Height>12</Height>
+					<Text>${BotState}</Text>
+				</text>
+				<button Name='Close' template='WoW.window.TitleBar.Close' />
+				<button Name='TitlePlay' template='WoW.window.TitleBar.Play'>
+					<OnLeftClick>
+						Script[WoWBot]:Resume
+						UIElement[WoWBot].FindUsableChild[Pause WoWBot,commandbutton]:Show
+						UIElement[WoWBot].FindUsableChild[Play WoWBot,commandbutton]:Hide
+						UIElement[WoWBot].FindUsableChild[TitlePause,button]:Show
+						UIElement[WoWBot].FindUsableChild[TitlePlay,button]:Hide
+					</OnLeftClick>
+				</button>
+				<button Name='TitlePause' template='WoW.window.TitleBar.Pause'>
+					<Visible>0</Visible>
+					<OnLeftClick>
+						move -stop
+						Script[WoWBot]:Pause
+						UIElement[WoWBot].FindUsableChild[Pause WoWBot,commandbutton]:Hide
+						UIElement[WoWBot].FindUsableChild[Play WoWBot,commandbutton]:Show
+						UIElement[WoWBot].FindUsableChild[TitlePause,button]:Hide
+						UIElement[WoWBot].FindUsableChild[TitlePlay,button]:Show
+					</OnLeftClick>
+				</button> 
+				<button Name='Minimize' template='WoW.window.TitleBar.Minimize'>
+					<OnLeftClick>
+						UIElement[WoWBot].FindUsableChild[TitleBotStatus,text]:Show
+						UIElement[WoWBot].FindUsableChild[TitleBotStatusCap,text]:Show
+					</OnLeftClick>
+				</button>
+				<button Name='Maximize' template='WoW.window.TitleBar.Maximize'>
+					<OnLeftClick>
+						UIElement[WoWBot].FindUsableChild[TitleBotStatus,text]:Hide
+						UIElement[WoWBot].FindUsableChild[TitleBotStatusCap,text]:Hide
+					</OnLeftClick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Children>
+			<TabControl Name='WoWBotTab'>
+				<X>0</X>
+				<Y>0</Y>
+				<Width>100%</Width>
+				<Height>100%</Height>
+				<FrameTexture />
+				<Tabs>
+					<Tab Name='Main'>
+						<commandbutton name='Force Sell' Template='WoW.commandbutton'> 
+							<X>6</X> 
+							<Y>160</Y>
+							<Width>80</Width>
+							<Text>Force Sell</Text> 
+							<OnLeftClick>
+							forcedselling
+							</OnLeftClick>
+						</commandbutton>
+						<commandbutton name='Pause WoWBot' Template='WoW.commandbutton'> 
+							<X>6</X> 
+							<Y>6</Y>
+							<Width>70</Width>
+							<Visible>0</Visible>
+							<Text>Pause</Text>
+							<OnLeftClick>
+								move -stop
+								Script[WoWBot]:Pause
+								UIElement[WoWBot].FindUsableChild[Pause WoWBot,commandbutton]:Hide
+								UIElement[WoWBot].FindUsableChild[Play WoWBot,commandbutton]:Show
+								UIElement[WoWBot].FindUsableChild[TitlePause,button]:Hide
+								UIElement[WoWBot].FindUsableChild[TitlePlay,button]:Show
+							</OnLeftClick>
+						</commandbutton> 
+						<commandbutton name='Play WoWBot' Template='WoW.commandbutton'> 
+							<X>6</X> 
+							<Y>6</Y>
+							<Width>70</Width>
+							<Text>Play</Text> 
+							<OnLeftClick>
+								Script[WoWBot]:Resume
+								UIElement[WoWBot].FindUsableChild[Pause WoWBot,commandbutton]:Show
+								UIElement[WoWBot].FindUsableChild[Play WoWBot,commandbutton]:Hide
+								UIElement[WoWBot].FindUsableChild[TitlePause,button]:Show
+								UIElement[WoWBot].FindUsableChild[TitlePlay,button]:Hide
+							</OnLeftClick>
+						</commandbutton> 
+						<commandbutton name='Stop WoWBot' Template='WoW.commandbutton'> 
+							<X>84</X> 
+							<Y>6</Y>
+							<Width>70</Width>
+							<Text>Stop</Text> 
+							<Command>EndScript WoWBot</Command>
+						</commandbutton>
+						<Text name='WoWBotBotStateCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>5</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>State:</Text> 
+						</Text> 
+						<Text name='WoWBotBotState'> 
+							<X>330</X> 
+							<Y>5</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${BotState}</Text> 
+						</Text> 
+						<Text name='WoWBotRunningTimeCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>20</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Running Time:</Text> 
+						</Text> 
+						<Text name='WoWBotRunningTime'> 
+							<X>330</X> 
+							<Y>20</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${Math.Calc[(${Script[WoWBot].RunningTime}/1000/60/60)%60].Int.LeadingZeroes[2]}:${Math.Calc[(${Script[WoWBot].RunningTime}/1000/60)%60].Int.LeadingZeroes[2]}:${Math.Calc[(${Script[WoWBot].RunningTime}/1000)%60].Int.LeadingZeroes[2]}</Text> 
+						</Text> 
+						<Text name='WoWBotKillsCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>35</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Total Kills:</Text> 
+						</Text> 
+						<Text name='WoWBotKills'> 
+							<X>330</X> 
+							<Y>35</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${TotalKills}</Text> 
+						</Text> 
+						<Text name='WoWBotDeathsCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>50</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Total Deaths:</Text> 
+						</Text> 
+						<Text name='WoWBotDeaths'> 
+							<X>330</X> 
+							<Y>50</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${TotalDeaths}</Text> 
+						</Text> 
+						<Text name='WoWBotExpCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>65</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Total XP Gained:</Text> 
+						</Text> 
+						<Text name='WoWBotExp'> 
+							<X>330</X> 
+							<Y>65</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${TotalXPGained}</Text> 
+						</Text> 
+						<Text name='WoWBotExpMinCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>80</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Total XP/Hour:</Text> 
+						</Text> 
+						<Text name='WoWBotExpMin'> 
+							<X>330</X> 
+							<Y>80</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${Math.Calc[${XPSec}*3600]}</Text> 
+						</Text> 
+						<Text name='WoWBotExpleftCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>95</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Exp left to Next Level:</Text> 
+						</Text> 
+						<Text name='WoWBotExpleft'> 
+							<X>330</X> 
+							<Y>95</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${XPToLevel}</Text> 
+						</Text> 
+						<Text name='WoWBotETLevelCap' Template='WoW.Text'> 
+							<X>115</X> 
+							<Y>110</Y> 
+							<Width>210</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Est Time to Next Level:</Text> 
+						</Text> 
+						<Text name='WoWBotETLevel'> 
+							<X>330</X> 
+							<Y>110</Y> 
+							<Width>100</Width> 
+							<Height>20</Height> 
+							<Text>${Math.Calc[(${TimeNextLevel}/60/60)%60].Int.LeadingZeroes[2]}:${Math.Calc[(${TimeNextLevel}/60)%60].Int.LeadingZeroes[2]}:${Math.Calc[${TimeNextLevel}%60].Int.LeadingZeroes[2]}</Text> 
+						</Text> 
+						<Text name='WoWBotMECap' Template='WoW.Text'> 
+							<X>144</X> 
+							<Y>125</Y> 
+							<Width>120</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>Money Earned:</Text> 
+						</Text> 
+						<Text name='WoWBotMEGold'> 
+							<X>266</X> 
+							<Y>125</Y> 
+							<Width>50</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>${Math.Calc[${moneygain} / 10000].Int.LeadingZeroes[2]}</Text> 
+						</Text>          
+						<commandbutton name='WoWBotMEGoldImage'> 
+							<X>318</X> 
+							<Y>125</Y> 
+							<Width>10</Width> 
+							<Height>10</Height> 
+							<Texture Filename="gold.tga"></Texture> 
+							<TexturePressed Filename="gold.tga"></TexturePressed> 
+							<TextureHover Filename="gold.tga"></TextureHover> 
+							<Command></Command> 
+						</commandbutton> 
+						<Text name='WoWBotMESilver'> 
+							<X>328</X> 
+							<Y>125</Y> 
+							<Width>25</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>${Math.Calc[(${moneygain} / 100) % 100].Int.LeadingZeroes[2]}</Text> 
+						</Text> 
+						<commandbutton name='WoWBotMESilverImage'> 
+							<X>355</X> 
+							<Y>125</Y> 
+							<Width>10</Width> 
+							<Height>10</Height> 
+							<Texture Filename="silver.tga"></Texture> 
+							<TexturePressed Filename="silver.tga"></TexturePressed> 
+							<TextureHover Filename="silver.tga"></TextureHover> 
+							<Command></Command> 
+						</commandbutton> 
+						<Text name='WoWBotMECopper'> 
+							<X>365</X> 
+							<Y>125</Y> 
+							<Width>25</Width> 
+							<Height>20</Height> 
+							<Alignment>Right</Alignment> 
+							<Text>${Math.Calc[${moneygain} % 100].Int.LeadingZeroes[2]}</Text> 
+						</Text> 
+						<commandbutton name='WoWBotMECopperImage'> 
+							<X>392</X> 
+							<Y>125</Y> 
+							<Width>10</Width> 
+							<Height>10</Height> 
+							<Texture Filename="copper.tga"></Texture> 
+							<TexturePressed Filename="copper.tga"></TexturePressed> 
+							<TextureHover Filename="copper.tga"></TextureHover> 
+							<Command></Command> 
+						</commandbutton>
+						<commandcheckbox name='ShowWayPoints' Template='WoW.commandcheckbox'> 
+							<X>3</X> 
+							<Y>45</Y> 
+							<Width>120</Width> 
+							<Height>16</Height> 
+							<Text>Show Waypoints</Text> 
+							<Command>ShowWayPoints:Toggle</Command> 
+							<CommandChecked>ShowWayPoints:Toggle</CommandChecked> 
+							<Data>${ShowWayPoints}</Data> 
+						</commandcheckbox> 
+						<commandbutton name='Zoom In'> 
+							<X>3</X> 
+							<Y>65</Y> 
+							<Width>25</Width> 
+							<Height>25</Height> 
+							<Texture Filename="PlusButton-Up.png"></Texture>
+							<TexturePressed Filename="PlusButton-Down.png"></TexturePressed>
+							<TextureHover Filename="PlusButton-Highlight.png"></TextureHover>
+							<Command>Zoom:Inc</Command>
+						</commandbutton> 
+						<commandbutton name='Zoom Out'> 
+							<X>28</X> 
+							<Y>65</Y> 
+							<Width>25</Width> 
+							<Height>25</Height> 
+							<Texture Filename="MinusButton-Up.png"></Texture>
+							<TexturePressed Filename="MinusButton-Down.png"></TexturePressed>
+							<TextureHover Filename="MinusButton-Highlight.png"></TextureHover>
+							<Command>Zoom:Dec</Command>
+						</commandbutton>
+						<Text name='ZoomCap' template='WoW.text'>
+							<X>58</X>
+							<Y>73</Y>
+							<Width>30</Width> 
+							<Height>20</Height> 
+							<Text>Zoom:</Text>
+						</Text>
+						<Text name='Zoom'>
+							<X>87</X>
+							<Y>72</Y>
+							<Width>20</Width> 
+							<Height>20</Height> 
+							<Text>${Zoom}</Text>
+						</Text>
+						<Slider Name='LogoutSlider'>
+							<X>5</X>
+							<Y>95</Y>
+							<Width>150</Width>
+							<Height>15</Height>
+							<Range>24</Range>
+							<OnLoad>
+								This:SetValue[0]
+							</OnLoad>
+							<onchange>
+								LogoutTimer:Set[${Math.Calc[(${This.Value})*1800]}]
+								LogoutTimerStartTime:Set[${Script[WoWBot].RunningTime}]
+							</onchange>
+						</Slider>
+						<Text name='LogoutSliderCap' template='WoW.text'>
+							<X>6</X>
+							<Y>117</Y>
+							<Width>150</Width>
+							<Height>15</Height>
+							<Text>Logout in               hours.</Text>
+						</Text>
+						<Text name='LogoutSliderValue'>
+							<X>45</X>
+							<Y>115</Y>
+							<Width>150</Width>
+							<Height>15</Height>
+							<Text>${If[${LogoutTimer}==0,"-----",${Math.Calc[(${LogoutTimer}*1000 - (${Script[WoWBot].RunningTime}-${LogoutTimerStartTime}))/3600000].Int}:${Math.Calc[((${LogoutTimer}*1000 - (${Script[WoWBot].RunningTime}-${LogoutTimerStartTime}))/60000)%60].Int} ]}</Text>
+						</Text>
+					</Tab>
+					<Tab Name="Status">
+						<TabControl Name='WoWBotConsoleTab'>
+							<X>0</X>
+							<Y>0</Y>
+							<Width>100%</Width>
+							<Height>100%</Height>
+							<FrameTexture />
+							<Tabs>
+								<Tab name='Status'>
+									<console Name="WoWStatus">
+										<Width>100%</Width> 
+										<Height>100%</Height> 
+									</console>
+								</Tab>
+								<Tab name='Whispers'>
+									<console Name="WoWWhisper">
+										<Width>100%</Width> 
+										<Height>100%</Height> 
+									</console>
+								</Tab>
+							</Tabs>
+						</TabControl>
+					</Tab>
+					<Tab Name="Sorter">
+						<commandbutton name='Keep' Template='WoW.commandbutton'> 
+							<X>6</X> 
+							<Y>6</Y>
+							<Width>40</Width>
+							<Text>Keep</Text> 
+							<Command>keep</Command>
+						</commandbutton> 
+						<commandbutton name='Sell' Template='WoW.commandbutton'>
+							<X>56</X> 
+							<Y>6</Y>
+							<Width>40</Width>
+							<Text>Sell</Text>
+							<Command>sell</Command>
+						</commandbutton> 
+						<commandbutton name='Trash' Template='WoW.commandbutton'> 
+							<X>106</X> 
+							<Y>6</Y>
+							<Width>40</Width>
+							<Text>Trash</Text> 
+							<Command>trash</Command>
+						</commandbutton>
+						<commandbutton name='Open' Template='WoW.commandbutton'> 
+							<X>156</X> 
+							<Y>6</Y>
+							<Width>40</Width>
+							<Text>Open</Text> 
+							<Command>open</Command>
+						</commandbutton>
+						<listbox name='ItemBox'>
+							<X>6</X>
+							<Y>42</Y>
+							<Width>190</Width>
+							<Height>234</Height>
+							<Sort>None</Sort>
+							<Items>
+							</Items>
+						</listbox>
+						<TabControl Name="SorterTabs">
+							<X>210</X>
+							<Y>6</Y>
+							<Width>190</Width>
+							<Height>270</Height>
+							<FrameTexture />
+							<Border>0</Border>
+							<Tabs>
+								<Tab Name="Keep">
+									<listbox name='ItemBox'>
+										<X>0</X>
+										<Y>0</Y>
+										<Width>100%</Width>
+										<Height>90%</Height>
+										<Sort>None</Sort>
+										<Items>
+										</Items>
+									</listbox>
+									<commandbutton name='RemoveItem' Template='WoW.commandbutton'>
+										<X>0</X> 
+										<Y>90%</Y>
+										<Width>100%</Width>
+										<Height>11%</Height>
+										<Text>Remove</Text>
+										<Command>RemoveKeep</Command>
+									</commandbutton> 
+								</Tab>
+								<Tab Name="Sell">
+									<listbox name='ItemBox'>
+										<X>0</X>
+										<Y>0</Y>
+										<Width>100%</Width>
+										<Height>90%</Height>
+										<Sort>None</Sort>
+										<Items>
+										</Items>
+									</listbox>
+									<commandbutton name='RemoveItem' Template='WoW.commandbutton'>
+										<X>0</X> 
+										<Y>90%</Y>
+										<Width>100%</Width>
+										<Height>11%</Height>
+										<Text>Remove</Text>
+										<Command>RemoveSell</Command>
+									</commandbutton> 
+								</Tab>
+								<Tab Name="Destroy">
+									<listbox name='ItemBox'>
+										<X>0</X>
+										<Y>0</Y>
+										<Width>100%</Width>
+										<Height>90%</Height>
+										<Sort>None</Sort>
+										<Items>
+										</Items>
+									</listbox>
+									<commandbutton name='RemoveItem' Template='WoW.commandbutton'>
+										<X>0</X> 
+										<Y>90%</Y>
+										<Width>100%</Width>
+										<Height>11%</Height>
+										<Text>Remove</Text>
+										<Command>RemoveTrash</Command>
+									</commandbutton> 
+								</Tab>
+								<Tab Name="Open">
+									<listbox name='ItemBox'>
+										<X>0</X>
+										<Y>0</Y>
+										<Width>100%</Width>
+										<Height>90%</Height>
+										<Sort>None</Sort>
+										<Items>
+										</Items>
+									</listbox>
+									<commandbutton name='RemoveItem' Template='WoW.commandbutton'>
+										<X>0</X> 
+										<Y>90%</Y>
+										<Width>100%</Width>
+										<Height>11%</Height>
+										<Text>Remove</Text>
+										<Command>RemoveOpen</Command>
+									</commandbutton> 
+
+									<commandbutton name='RemoveItem' Template='WoW.commandbutton'>
+										<X>0</X> 
+										<Y>90%</Y>
+										<Width>100%</Width>
+										<Height>11%</Height>
+										<Text>Remove</Text>
+										<Command>RemoveOpen</Command>
+									</commandbutton> 
+								</Tab>
+							</Tabs>`
+						</TabControl>
+					</Tab>
+					<Tab Name="PathFiles">
+						<Frame Name="PathFileFrame">
+							<Width>100%</Width>
+							<Height>100%</Height>
+							<Texture Filename= ""/>
+							<Children>
+								<Text name='VersionNumber' Template='WoW.Text'>
+									<X>6</X>
+									<Y>10</Y>
+									<Width>600</Width>
+									<Height>10</Height>
+									<Text>Pathfile name? (ie. WoWBotPath.xml)</Text>
+								</Text>
+								<Textentry name='newpathfile' Template='WoW.Textentry'>		
+									<X>6</X>							
+									<Y>30</Y>						
+									<Width>256</Width>						
+									<Height>18</Height>				
+									<OnLoad>
+									This:SetText[WoWBotPath_${Script[wowbot].VariableScope.CharacterName}.xml]
+									</OnLoad>
+								</Textentry>
+								<commandbutton name='Change' Template='WoW.commandbutton'> 
+									<X>6</X> 
+									<Y>50</Y>
+									<Width>40</Width>
+									<Text>Change</Text> 
+									<OnLeftClick>
+
+									echo ${This.Parent.FindChild[newpathfile].Text.Escape}
+									changepath ${This.Parent.FindChild[newpathfile].Text.Escape}
+							
+									</OnLeftClick>
+								</commandbutton>
+
+								<commandbutton name='NewPath' Template='WoW.commandbutton'> 
+									<X>6</X> 
+									<Y>80</Y>
+									<Width>40</Width>
+									<Text>NewPath</Text> 
+									<OnLeftClick>
+									newpathnow ${This.Parent.FindChild[newpathfile].Text.Escape}
+									</OnLeftClick>
+								</commandbutton>
+							</Children>
+						</Frame>
+					</Tab>
+					<Tab Name="Options">
+						<Frame Name="OptionsTab">
+							<Width>100%</Width>
+							<Height>100%</Height>
+							<Texture Filename="" />
+							<Children>
+								<Text name='MinHealthPctBox' Template='WoW.Text'>
+									<X>40</X>
+									<Y>10</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>MinHealthPct</Text>
+								</Text>	
+								<Textentry name='newMinHealthPct' Template='WoW.Textentry'>		
+									<X>6</X>							
+									<Y>10</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.MinHealthPct}]
+									</OnLoad>				
+								</Textentry>
+								<Text name='MinManaPctBox' Template='WoW.Text'>
+									<X>40</X>
+									<Y>30</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>MinManaPct</Text>
+								</Text>
+								<Textentry name='newMinManaPct' Template='WoW.Textentry'>		
+									<X>6</X>							
+									<Y>30</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.MinManaPct}]
+									</OnLoad>					
+								</Textentry>
+								<Text name='MaxRoam' Template='WoW.Text'>
+									<X>40</X>
+									<Y>60</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>MaxRoam</Text>
+								</Text>	
+								<Textentry name='newMaxRoam' Template='WoW.Textentry'>		
+									<X>6</X>							
+									<Y>60</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.MaxRoam}]
+									</OnLoad>					
+								</Textentry>
+								<Text name='TargetingRange' Template='WoW.Text'>
+									<X>40</X>
+									<Y>80</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>TargetingRange</Text>
+								</Text>
+								<Textentry name='newTargetingRange' Template='WoW.Textentry'>		
+									<X>6</X>							
+									<Y>80</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.TargetingRange}]
+									</OnLoad>					
+								</Textentry>
+
+								<Text name='PullingRange' Template='WoW.Text'>
+									<X>40</X>
+									<Y>100</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>PullingRange</Text>
+								</Text>
+								<Textentry name='newPullingRange' Template='WoW.Textentry'>		
+									<X>6</X>							
+									<Y>100</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.PullingRange}]
+									</OnLoad>					
+								</Textentry>
+								<Text name='PullingRange' Template='WoW.Text'>
+									<X>40</X>
+									<Y>100</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>PullingRange</Text>
+								</Text>
+								<Textentry name='newTargetMinLevelDiff' Template='WoW.Textentry'>		
+									<X>106</X>							
+									<Y>10</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.TargetMinLevelDiff}]
+									</OnLoad>					
+								</Textentry>
+								<Text name='TargetMinLevelDiff' Template='WoW.Text'>
+									<X>140</X>
+									<Y>10</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>TargetMinLevelDiff</Text>
+								</Text>
+								<Textentry name='newTargetMaxLevelDiff' Template='WoW.Textentry'>		
+									<X>106</X>							
+									<Y>30</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.TargetMaxLevelDiff}]
+									</OnLoad>					
+								</Textentry>
+								<Text name='TargetMaxLevelDiff' Template='WoW.Text'>
+									<X>140</X>
+									<Y>30</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>TargetMaxLevelDiff</Text>
+								</Text>
+								<Textentry name='newRepairPctLevel' Template='WoW.Textentry'>		
+									<X>106</X>							
+									<Y>60</Y>						
+									<Width>32</Width>						
+									<Height>18</Height>
+									<OnLoad>
+									This:SetText[${Script[wowbot].VariableScope.RepairPctLevel}]
+									</OnLoad>					
+								</Textentry>
+								<Text name='RepairPctLevel' Template='WoW.Text'>
+									<X>140</X>
+									<Y>60</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>RepairPctLevel</Text>
+								</Text>
+								<commandcheckbox name='boolcomplex' Template='WoW.commandcheckbox'> 
+									<X>6</X> 
+									<Y>120</Y> 
+									<Width>120</Width> 
+									<Height>16</Height> 
+									<Text>ComplexTargetting</Text> 
+									<Command>ComplexTargeting:Toggle</Command> 
+									<CommandChecked>ComplexTargeting:Toggle</CommandChecked> 
+									<Data>${ComplexTargeting}</Data> 
+								</commandcheckbox> 
+
+								<commandcheckbox name='boolloop' Template='WoW.commandcheckbox'> 
+									<X>106</X> 
+									<Y>80</Y> 
+									<Width>120</Width> 
+									<Height>16</Height> 
+									<Text>LoopPatrolPath</Text> 
+									<Command>LoopPatrolPath:Toggle</Command> 
+									<CommandChecked>LoopPatrolPath:Toggle</CommandChecked> 
+									<Data>${LoopPatrolPath}</Data> 
+								</commandcheckbox> 
+
+								<commandbutton name='Set' Template='WoW.commandbutton'> 
+									<X>56</X> 
+									<Y>200</Y>
+									<Width>40</Width>
+									<Text>Set</Text>
+									
+									<OnLeftClick>
+									setoptions ${This.Parent.FindChild[newMinHealthPct].Text} ${This.Parent.FindChild[newMinManaPct].Text} ${This.Parent.FindChild[newMaxRoam].Text} ${This.Parent.FindChild[newTargetingRange].Text} ${This.Parent.FindChild[newPullingRange].Text} ${This.Parent.FindChild[newTargetMinLevelDiff].Text} ${This.Parent.FindChild[newTargetMaxLevelDiff].Text} ${This.Parent.FindChild[newRepairPctLevel].Text}
+									</OnLeftClick>
+								</commandbutton>
+								<commandbutton name='Apply' Template='WoW.commandbutton'> 
+									<X>6</X> 
+									<Y>200</Y>
+									<Width>40</Width>
+									<Text>Apply</Text> 
+									<OnLeftClick>
+									changeoptions ${This.Parent.FindChild[newMinHealthPct].Text} ${This.Parent.FindChild[newMinManaPct].Text} ${This.Parent.FindChild[newMaxRoam].Text} ${This.Parent.FindChild[newTargetingRange].Text} ${This.Parent.FindChild[newPullingRange].Text} ${This.Parent.FindChild[newTargetMinLevelDiff].Text} ${This.Parent.FindChild[newTargetMaxLevelDiff].Text} ${This.Parent.FindChild[newRepairPctLevel].Text} ${This.Parent.FindChild[boolloop].Data} ${This.Parent.FindChild[boolcomplex].Data}
+									</OnLeftClick>
+								</commandbutton>
+							</Children>
+						</Frame>
+					</Tab>
+					<Tab Name="About">
+						<Frame Name="AboutTab">
+							<Width>100%</Width>
+							<Height>100%</Height>
+							<Texture Filename='Background1.png' />
+							<Children>
+								<Text name='VersionNumber' Template='WoW.Text'>
+									<X>0</X>
+									<Y>r10</Y>
+									<Width>100</Width>
+									<Height>10</Height>
+									<Text>Version 14</Text>
+								</Text>
+							</Children>
+						</Frame>
+					</Tab>
+				</Tabs>
+			</TabControl>
+		</Children> 
+	</Window> 
+</ISUI>

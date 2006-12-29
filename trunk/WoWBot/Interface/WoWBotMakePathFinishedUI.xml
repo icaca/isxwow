@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ISUI> 
+	<Window name='WoWBotPather' Template='WoW.Window'>
+		<X>50%</X>
+		<Y>50%</Y>
+		<Title>Finished Path</Title>
+		<Width>300</Width>
+		<Height>88</Height>
+		<BorderColor>FF333333</BorderColor>
+		<Children>
+			<Text name='Finish Message' Template='WoW.text'>
+				<X>10</X>
+				<Y>10</Y>
+				<Width>280</Width>
+				<Height>16</Height>
+				<Color>FFEECC00</Color>
+				<Text>Click the finished button when</Text>
+			</Text>
+			<Text name='Finish Message2' Template='WoW.text'>
+				<X>10</X>
+				<Y>26</Y>
+				<Width>280</Width>
+				<Height>22</Height>
+				<Color>FFEECC00</Color>
+				<Text>your done making this path</Text>
+			</Text>
+			<Text name='Finish Message3'  Template='WoW.text'>
+				<X>10</X>
+				<Y>42</Y>
+				<Width>280</Width>
+				<Height>22</Height>
+				<Color>FFEECC00</Color>
+				<Text>segment.</Text>
+			</Text>
+			<commandcheckbox name='Pause' Template='WoW.commandcheckbox'> 
+				<X>55</X> 
+				<Y>60</Y> 
+				<Width>120</Width> 
+				<Height>16</Height> 
+				<Text>Pause</Text> 
+				<Command>Script[WoWBotMakePath].Variable[PauseMakePath]:Toggle</Command> 
+				<CommandChecked>Script[WoWBotMakePath].Variable[PauseMakePath]:Toggle</CommandChecked> 
+				<Data>${Script[WoWBotMakePath].Variable[PauseMakePath]}</Data> 
+			</commandcheckbox> 
+			<commandbutton name='Finished' Template='WoW.commandbutton'>
+				<X>145</X>
+				<Y>53</Y>
+				<Width>130</Width>
+				<Height>30</Height>
+				<Text>Finished</Text>
+				<Command>Script[WoWBotMakePath].Variable[FinishedPath]:Set[TRUE]</Command>
+			</commandbutton>
+		</Children>
+	</Window>
+	<hud name='WoWBotPather HUD'>
+		<X>0</X>
+		<Y>0</Y>
+		<Width>100%</Width>
+		<Height>100%</Height>
+		<Children>
+			<hudelement name='LastPoint'>
+				<X>40%</X>
+				<Y>10%</Y>
+				<TextColor>FF00FF00</TextColor>
+				<FontSize>20</FontSize>
+				<Text>Last Point: ${Script[WoWBotPath].Variable[LastPoint]}</Text>
+				<Group>Points Indicator</Group>
+			</hudelement>
+		</Children>
+	</hud>
+</ISUI>

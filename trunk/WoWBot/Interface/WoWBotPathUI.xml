@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ISUI> 
+	<Window name='WoWBotPathUI' Template='WoW.Window' > 
+		<Visible>1</Visible>
+		<Title>Mapping Tools</Title>
+		<Title />
+		<X>85%</X> 
+		<Y>20%</Y> 
+		<Width>140</Width> 
+		<Height>400</Height>
+		<Children>
+			<text name='PointsCap'>
+				<X>5</X>
+				<Y>5</Y>
+				<Width>140</Width> 
+				<Height>22</Height>
+				<FontSize>12</FontSize>
+				<Color>FFEECC00</Color>
+				<Text>Point Editing</Text>
+			</text>		
+			<commandbutton name='AddPoint' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>25</Y>
+				<Width>125</Width> 
+				<Text>Add</Text> 
+				<Command></Command>
+			</commandbutton> 
+			<commandbutton name='AddCustPoint' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>55</Y> 
+				<Width>125</Width> 
+				<Text>Add Custom</Text> 
+				<Command></Command>
+			</commandbutton> 
+			<commandbutton name='DeleteLast' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>85</Y> 
+				<Width>125</Width> 
+				<Text>Delete Last</Text> 
+				<Command></Command>
+			</commandbutton> 
+			<commandbutton name='EditLast' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>115</Y> 
+				<Width>125</Width> 
+				<Text>Edit Last</Text> 
+				<Command></Command>
+			</commandbutton> 
+			<commandbutton name='ResetLast' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>145</Y> 
+				<Width>125</Width> 
+				<Text>Reset Last</Text> 
+				<Command></Command>
+			</commandbutton> 
+			<text name='ConnectionsCap'>
+				<X>5</X>
+				<Y>175</Y>
+				<Width>140</Width> 
+				<Height>22</Height>
+				<FontSize>12</FontSize>
+				<Color>FFEECC00</Color>
+				<Text>Link Editing</Text>
+			</text>		
+			<commandbutton name='ConnectNearest' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>195</Y> 
+				<Width>125</Width> 
+				<Text>To Nearest</Text> 
+				<Command></Command>
+			</commandbutton> 
+			<commandbutton name='ConnectLast' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>225</Y> 
+				<Width>125</Width> 
+				<Text>To Last</Text> 
+				<Command></Command>
+			</commandbutton> 
+			<text name='LinkCap'>
+				<X>18</X>
+				<Y>257</Y>
+				<Width>140</Width> 
+				<Height>22</Height>
+				<FontSize>12</FontSize>
+				<Color>FFEECC00</Color>
+				<Text>Auto Link</Text>
+			</text>
+			<commandcheckbox name='AutoLast' Template='WoW.commandcheckbox'> 
+				<X>18</X> 
+				<Y>275</Y> 
+				<Text>Last</Text> 
+				<Command></Command> 
+				<CommandChecked></CommandChecked> 
+				<Data>TRUE</Data> 
+			</commandcheckbox> 
+			<commandcheckbox name='AutoNearest' Template='WoW.commandcheckbox'> 
+				<X>18</X> 
+				<Y>300</Y> 
+				<Text>Nearest</Text> 
+				<Command></Command> 
+				<CommandChecked></CommandChecked> 
+				<Data>FALSE</Data> 
+			</commandcheckbox> 
+			<text name='ZoomCap'>
+				<X>5</X>
+				<Y>324</Y>
+				<Width>140</Width> 
+				<Height>22</Height>
+				<FontSize>12</FontSize>
+				<Color>FFEECC00</Color>
+				<Text>Zoom</Text>
+			</text>
+			<commandbutton name='Zoom In'> 
+				<X>20</X> 
+				<Y>340</Y> 
+				<Width>25</Width> 
+				<Height>25</Height> 
+				<Texture Filename="PlusButton-Up.png"></Texture>
+				<TexturePressed Filename="PlusButton-Down.png"></TexturePressed>
+				<TextureHover Filename="PlusButton-Highlight.png"></TextureHover>
+				<Command>Script[WoWBotPath].Variable[Zoom]:Inc</Command>
+			</commandbutton> 
+			<commandbutton name='Zoom Out'> 
+				<X>50</X> 
+				<Y>340</Y> 
+				<Width>25</Width> 
+				<Height>25</Height> 
+				<Texture Filename="MinusButton-Up.png"></Texture>
+				<TexturePressed Filename="MinusButton-Down.png"></TexturePressed>
+				<TextureHover Filename="MinusButton-Highlight.png"></TextureHover>
+				<Command>Script[WoWBotPath].Variable[Zoom]:Dec</Command>
+			</commandbutton>
+			<Text name='Zoom'>
+				<X>83</X>
+				<Y>347</Y>
+				<Width>20</Width> 
+				<Height>20</Height> 
+				<Text>${Script[WoWBotPath].Variable[Zoom]}</Text>
+			</Text>			
+			<commandbutton name='Finished' Template='WoW.commandbutton'> 
+				<X>10</X> 
+				<Y>370</Y> 
+				<Width>125</Width> 
+				<Text>Done</Text> 
+				<Command></Command>
+			</commandbutton>
+		</Children> 
+	</Window> 
+</ISUI>
